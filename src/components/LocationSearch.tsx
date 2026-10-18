@@ -29,7 +29,7 @@ function LocationSearch({ onPlaceClick }: LocationSearchProps) {
         />
       </form>
       <h1 className="font-bold mt-6">Found Locations</h1>
-      <div className="grid gird-cols-[1fr_40px] gap-2 mt-2 items-center">
+      <div className="grid grid-cols-[1fr_40px] gap-2 mt-2 items-center">
         {places.map((place) => {
           return (
             <Fragment key={place.id}>
