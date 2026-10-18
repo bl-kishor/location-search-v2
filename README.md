@@ -2,6 +2,10 @@
 
 A small React app for learning how to connect a location search to an interactive map. It combines Leaflet, OpenStreetMap data, Tailwind CSS, and TypeScript.
 
+## Live demo
+
+[Try Location Search](https://location-search-virid.vercel.app/)
+
 ## How it works
 
 1. Enter a place name in the search panel and submit the form.
