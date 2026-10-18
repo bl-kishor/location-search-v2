@@ -1,78 +1,57 @@
-# React + TypeScript + Vite
+# Location Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React app for learning how to connect a location search to an interactive map. It combines Leaflet, OpenStreetMap data, Tailwind CSS, and TypeScript.
 
-Currently, two official plugins are available:
+## How it works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Enter a place name in the search panel and submit the form.
+2. The app requests up to five matching addresses from the Nominatim search service.
+3. Choose a result with **Go** to move the map to that location and show its marker.
 
-## React Compiler
+The map starts centered near New York City. Search results are held in React state and passed between the search panel and map as typed `Place` data.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Learning topics
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- Embedding and controlling a Leaflet map with React Leaflet
+- Fetching and mapping geocoding results into application data
+- Sharing state and typed props between React components
+- Applying utility classes with Tailwind CSS
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 19 and TypeScript
+- Vite
+- Leaflet and React Leaflet
+- Tailwind CSS 4
+- OpenStreetMap tiles and the Nominatim search API
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Use a current Node.js installation with npm. Install dependencies and start the development server:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Search uses the public Nominatim service, and map tiles come from OpenStreetMap. The app does not currently require an API key.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Path | Purpose |
+| --- | --- |
+| `src/App.tsx` | Holds the selected place and lays out the search panel and map |
+| `src/components/LocationSearch.tsx` | Submits location searches and displays results |
+| `src/components/Map.tsx` | Renders the map, moves to the selected place, and displays its marker |
+| `src/api/search.ts` | Calls Nominatim and converts results into `Place` objects |
+| `src/api/Place.ts` | Defines the location data type |
+| `src/index.css` | Loads Tailwind CSS |
 
-```
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
